@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 //registering
-router.post("/", async (rwq, res) => {
+router.post("/", async (req, res) => {
   try {
     //1. destructure the req.body ( name, email, password)
     //2. check if user exist ( if user exist then throw error)
