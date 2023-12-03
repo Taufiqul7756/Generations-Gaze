@@ -4,6 +4,7 @@ const pool = require("../db.jsx");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../utils/jwtGenerator.js");
 const validInfo = require("../middleware/validInfo.jsx");
+const authorization = require("../middleware/authorization.jsx");
 
 //registering
 router.post("/register", validInfo, async (req, res) => {
@@ -63,6 +64,15 @@ router.post("/login", validInfo, async (req, res) => {
     //4. give them the jwt token
     const token = jwtGenerator(user.rows[0].user_id);
     res.json({ token });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("server Error");
+  }
+});
+
+router.get("/is-verify", authorization, async (req, res) => {
+  try {
+    res.json(true);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server Error");
