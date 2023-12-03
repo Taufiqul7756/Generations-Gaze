@@ -2,13 +2,13 @@ const express = require("express");
 const router = require("express").Router();
 const pool = require("../db.jsx");
 const bcrypt = require("bcrypt");
+const jwtGenerator = require("../utils/jwtGenerator.js");
 
 //registering
 router.post("/register", async (req, res) => {
   try {
     //1. destructure the req.body
     const { name, email, password } = req.body;
-    console.log(name, email, password);
 
     //2. check if user exist ( if user exist then throw error)
     const user = await pool.query("SELECT * From users WHERE user_email = $1", [
@@ -27,9 +27,11 @@ router.post("/register", async (req, res) => {
       "INSERT INTO users (user_name, user_email, user_password) VALUES ($1, $2, $3) RETURNING *",
       [name, email, bcryptPassword]
     );
-    res.json(newUser.rows[0]);
 
     //5. Generating our jwt token
+    const token = jwtGenerator(newUser.rows[0].user_id);
+    console.log(token);
+    res.json({ token });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server Error");
