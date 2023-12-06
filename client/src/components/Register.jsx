@@ -1,12 +1,41 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState, Fragment } from "react";
 
 const Register = ({ setAuth }) => {
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
+  const { email, password, name } = inputs;
+
+  const onChange = (e) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Register</h1>
+      <h1 className=" flex justify-center text-3xl font-bold underline">
+        Register
+      </h1>
+
+      <input type="email" class="form-input px-4 py-3 rounded-full" />
 
       <form class="max-w-sm mx-auto">
+        <div class="mb-5">
+          <label
+            for="text"
+            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Your Name
+          </label>
+          <input
+            type="text"
+            id="text"
+            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+            placeholder=""
+            required
+          />
+        </div>
         <div class="mb-5">
           <label
             for="email"
@@ -19,6 +48,8 @@ const Register = ({ setAuth }) => {
             id="email"
             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             placeholder="name@gmail.com"
+            value={email}
+            onChange={(e) => onChange(e)}
             required
           />
         </div>
@@ -36,7 +67,7 @@ const Register = ({ setAuth }) => {
             required
           />
         </div>
-        <div class="mb-5">
+        {/* <div class="mb-5">
           <label
             for="repeat-password"
             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -49,8 +80,8 @@ const Register = ({ setAuth }) => {
             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
             required
           />
-        </div>
-        <div class="flex items-start mb-5">
+        </div> */}
+        {/* <div class="flex items-start mb-5">
           <div class="flex items-center h-5">
             <input
               id="terms"
@@ -72,7 +103,7 @@ const Register = ({ setAuth }) => {
               terms and conditions
             </a>
           </label>
-        </div>
+        </div> */}
         <button
           onClick={() => setAuth(true)}
           type="submit"
