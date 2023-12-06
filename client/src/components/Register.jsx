@@ -1,80 +1,18 @@
-import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
-import { toast } from "react-toastify";
+import React from "react";
 
 const Register = ({ setAuth }) => {
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-    name: "",
-  });
-
-  const { email, password, name } = inputs;
-
-  const onChange = (e) =>
-    setInputs({ ...inputs, [e.target.name]: e.target.value });
-
-  const onSubmitForm = async (e) => {
-    e.preventDefault();
-    try {
-      const body = { email, password, name };
-      const response = await fetch(
-        "http://localhost:5000/authentication/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify(body),
-        }
-      );
-      const parseRes = await response.json();
-
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
-        toast.success("Register Successfully");
-      } else {
-        setAuth(false);
-        toast.error(parseRes);
-      }
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   return (
-    <Fragment>
-      <h1 className="mt-5 text-center">Register</h1>
-      <form onSubmit={onSubmitForm}>
-        <input
-          type="text"
-          name="email"
-          value={email}
-          placeholder="email"
-          onChange={(e) => onChange(e)}
-          className="form-control my-3"
-        />
-        <input
-          type="password"
-          name="password"
-          value={password}
-          placeholder="password"
-          onChange={(e) => onChange(e)}
-          className="form-control my-3"
-        />
-        <input
-          type="text"
-          name="name"
-          value={name}
-          placeholder="name"
-          onChange={(e) => onChange(e)}
-          className="form-control my-3"
-        />
-        <button className="btn btn-success btn-block">Submit</button>
-      </form>
-      <Link to="/login">login</Link>
-    </Fragment>
+    <div>
+      <h1 className="text-3xl font-bold underline">Register</h1>
+
+      <button
+        onClick={() => setAuth(true)}
+        type="button"
+        class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+      >
+        Login
+      </button>
+    </div>
   );
 };
 
