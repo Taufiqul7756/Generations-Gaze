@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 
-const Register = () => {
+const Register = ({ setAuth }) => {
   return (
     <>
-      <h1 className="flex justify-center font-bold underline"> Register</h1>
+      <h1 className="flex justify-center font-bold "> Register</h1>
       <div className="flex justify-center ">
         <form class="w-full max-w-lg">
           <div class="w-full px-3">
@@ -80,9 +80,10 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => setAuth(true)}
+            class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           >
-            Register new account
+            Sign up
           </button>
         </form>
       </div>
