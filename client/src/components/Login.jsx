@@ -4,7 +4,7 @@ const Login = ({ setAuth }) => {
   return (
     <>
       <h1 className="flex justify-center font-bold "> Login</h1>
-      <div>
+      <div class="grid justify-center">
         <div className="flex justify-center ">
           <form class="w-full max-w-lg">
             <div class="w-full px-3">
@@ -34,6 +34,7 @@ const Login = ({ setAuth }) => {
                 id="grid-password"
                 type="password"
                 placeholder="******************"
+                required
               />
               <p class="text-gray-600 text-xs italic">
                 Make it as long and as crazy as you'd like
@@ -58,9 +59,11 @@ const Login = ({ setAuth }) => {
             </div>
           </form>
         </div>
+
         <button
+          type="submit"
           onClick={() => setAuth(true)}
-          class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+          class=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
         >
           Sign in
         </button>
