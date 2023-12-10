@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, Redirect } from "react-router-dom";
 
 const Login = ({ setAuth }) => {
   return (
@@ -67,6 +68,7 @@ const Login = ({ setAuth }) => {
         >
           Sign in
         </button>
+        <Link to="/register"> I don't have a account. Goto Register Page</Link>
       </div>
     </>
   );
