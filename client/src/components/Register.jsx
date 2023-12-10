@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
+import { Link, Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
@@ -23,8 +25,10 @@ const Register = ({ setAuth }) => {
 
       const parseRes = await response.json();
       console.log(parseRes);
-      if (parseRes.authenticated) {
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
         setAuth(true);
+        toast.success("Register Successfully");
       }
     } catch (err) {
       console.error(err.message);
@@ -117,11 +121,11 @@ const Register = ({ setAuth }) => {
           </div>
           <button
             type="submit"
-            // onClick={() => setAuth(true)}
             className=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           >
             Sign up
           </button>
+          <Link to="/login"> I have a account. Goto login Page</Link>
         </form>
       </div>
     </>
