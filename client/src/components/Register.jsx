@@ -125,7 +125,7 @@ const Register = ({ setAuth }) => {
           >
             Sign up
           </button>
-          <Link to="/login"> I have a account. Goto login Page</Link>
+          <Link to="/login"> I have an account. Goto login Page</Link>
         </form>
       </div>
     </>
