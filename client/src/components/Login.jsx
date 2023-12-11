@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
@@ -11,12 +12,37 @@ const Login = ({ setAuth }) => {
 
   const onChange = (e) =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+
+    try {
+      const body = { email, password };
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const parseRes = await response.json();
+      console.log(parseRes);
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
+        setAuth(true);
+        toast.success("Logged in Successfully");
+      } else {
+        setAuth(false);
+        toast.error(parseRes);
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
   return (
     <>
       <h1 className="flex justify-center font-bold "> Login</h1>
       <div className="grid justify-center">
         <div className="flex justify-center ">
-          <form className="w-full max-w-lg">
+          <form onSubmit={onSubmitForm} className="w-full max-w-lg">
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -73,15 +99,14 @@ const Login = ({ setAuth }) => {
                 Remember me
               </label>
             </div> */}
+            <button
+              type="submit"
+              className=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              Sign in
+            </button>
           </form>
         </div>
-
-        <button
-          type="submit"
-          className=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-        >
-          Sign in
-        </button>
         <Link to="/register"> I don't have an account. Goto Register Page</Link>
       </div>
     </>
