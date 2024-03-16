@@ -29,8 +29,6 @@ const App = () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          // Validate token on the server if needed
-          // Set isAuthenticated to true if token is valid
           setIsAuthenticated(true);
         }
       } catch (err) {

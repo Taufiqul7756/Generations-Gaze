@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
@@ -35,80 +36,68 @@ const Register = ({ setAuth }) => {
     }
   };
   return (
-    <>
-      <h1 className="flex justify-center font-bold "> Register</h1>
-      <div className="flex justify-center ">
-        <form onSubmit={onSubmitForm} className="w-full max-w-lg">
-          <div className="w-full px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-first-name"
-            >
+    <div className="flex justify-center items-center h-screen bg-[#1877F2]">
+      <div className="max-w-md w-full px-6 py-12 bg-white shadow-md rounded-md">
+        <h1 className="text-3xl font-bold mb-8 text-center">Register</h1>
+        <form onSubmit={onSubmitForm}>
+          <div className="mb-4">
+            <label htmlFor="name" className="block mb-2 text-sm font-medium">
               Name
             </label>
             <input
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              id="grid-first-name"
               type="text"
+              id="name"
               name="name"
-              placeholder="Your Name"
               value={name}
               onChange={onChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Your Name"
               required
             />
           </div>
-          <div className="w-full px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-first-name"
-            >
+          <div className="mb-4">
+            <label htmlFor="email" className="block mb-2 text-sm font-medium">
               Email
             </label>
             <input
               type="email"
               id="email"
               name="email"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              placeholder="name@gmail.com"
               value={email}
               onChange={onChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="name@gmail.com"
               required
             />
           </div>
-          <div className="w-full px-3">
+          <div className="mb-4">
             <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="grid-password"
+              htmlFor="password"
+              className="block mb-2 text-sm font-medium"
             >
               Password
             </label>
             <input
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-              id="grid-password"
               type="password"
+              id="password"
               name="password"
-              placeholder="******************"
               value={password}
               onChange={onChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="******************"
+              required
             />
-            <p className="text-gray-600 text-xs italic">
-              Make it as long and as crazy as you'd like
-            </p>
           </div>
-
-          <div className="flex items-start mb-5">
-            <div className="flex items-center h-5">
-              <input
-                id="terms"
-                type="checkbox"
-                value=""
-                className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                required
-              />
-            </div>
+          <div className="flex items-start mb-4">
+            <input
+              id="terms"
+              type="checkbox"
+              className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
+              required
+            />
             <label
               htmlFor="terms"
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
               I agree with the{" "}
               <a
@@ -121,14 +110,21 @@ const Register = ({ setAuth }) => {
           </div>
           <button
             type="submit"
-            className=" bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
           >
             Sign up
           </button>
-          <Link to="/login"> I have an account. Goto login Page</Link>
         </form>
+        <div className="mt-4 text-center">
+          <p>
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-500 hover:underline">
+              Login here
+            </Link>
+          </p>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

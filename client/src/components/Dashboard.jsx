@@ -15,14 +15,18 @@ const Dashboard = ({ setAuth }) => {
     setAuth(false);
   };
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Dashboard</h1>
-      <button
-        onClick={handleLogout}
-        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-      >
-        Logout
-      </button>
+    <div className="p-10 bg-[#1877F2]">
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold underline">Dashboard</h1>
+        <button
+          onClick={handleLogout}
+          className="bg-transparent hover:bg-blue-500 text-white 
+          font-semibold hover:text-white py-2 px-4 
+          border border-black hover:border-transparent rounded"
+        >
+          Logout
+        </button>
+      </div>
 
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">All Users:</h2>
