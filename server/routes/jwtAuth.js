@@ -9,10 +9,7 @@ const authorization = require("../middleware/authorization.jsx");
 //registering
 router.post("/register", validInfo, async (req, res) => {
   try {
-    //1. destructure the req.body
     const { name, email, password } = req.body;
-
-    //2. check if user exist ( if user exist then throw error)
     const user = await pool.query("SELECT * From users WHERE user_email = $1", [
       email,
     ]);
@@ -43,7 +40,6 @@ router.post("/register", validInfo, async (req, res) => {
 //login---------------
 router.post("/login", validInfo, async (req, res) => {
   try {
-    //1. destructure req.body
     const { email, password } = req.body;
     //2. check if user doesn't exist ( if not throw error)
     const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
