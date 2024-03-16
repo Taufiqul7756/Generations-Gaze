@@ -1,4 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,20 +20,47 @@ import "./App.css";
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setAuth = (boolean) => {
-    setIsAuthenticated(boolean);
-  };
+  // const setAuth = (boolean) => {
+  //   setIsAuthenticated(boolean);
+  // };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          // Validate token on the server if needed
+          // Set isAuthenticated to true if token is valid
+          setIsAuthenticated(true);
+        }
+      } catch (err) {
+        console.error("Error checking authentication:", err);
+      }
+    };
+
+    checkAuth();
+  }, []);
   return (
     <>
       <Router>
         <Routes>
+          <Route
+            path="/"
+            element={
+              isAuthenticated ? (
+                <Navigate to="/dashboard" />
+              ) : (
+                <Login setAuth={setIsAuthenticated} />
+              )
+            }
+          />
           <Route
             path="/login"
             element={
               isAuthenticated ? (
                 <Navigate to="/dashboard" />
               ) : (
-                <Login setAuth={setAuth} />
+                <Login setAuth={setIsAuthenticated} />
               )
             }
           />
@@ -39,7 +70,7 @@ const App = () => {
               isAuthenticated ? (
                 <Navigate to="/dashboard" />
               ) : (
-                <Register setAuth={setAuth} />
+                <Register setAuth={setIsAuthenticated} />
               )
             }
           />
@@ -47,7 +78,7 @@ const App = () => {
             path="/dashboard"
             element={
               isAuthenticated ? (
-                <Dashboard setAuth={setAuth} />
+                <Dashboard setAuth={setIsAuthenticated} />
               ) : (
                 <Navigate to="/login" />
               )
@@ -55,6 +86,7 @@ const App = () => {
           />
         </Routes>
       </Router>
+      <ToastContainer />
     </>
   );
 };
