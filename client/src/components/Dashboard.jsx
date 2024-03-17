@@ -1,44 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import React from "react";
+import { useUser } from "../context/UserContext";
 
 const Dashboard = ({ setAuth }) => {
-  const [currentUsersToken, setCurrentUsersToken] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
+  const { currentUser, setCurrentUser } = useUser();
 
-  console.log("currentUsersToken:", currentUsersToken);
-  console.log("currentUser:", currentUser);
-
-  useEffect(() => {
-    // Decode token to get current user info
-    const token = localStorage.getItem("token");
-    console.log("token:", token);
-    if (token) {
-      const decoded = jwtDecode(token);
-      setCurrentUsersToken(decoded);
-      fetchUserData(decoded.user);
-    }
-  }, []);
-
-  const fetchUserData = async (userId) => {
-    try {
-      const response = await fetch(`http://localhost:5000/users/${userId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-        console.log("User data:", userData);
-        setCurrentUser(userData);
-      } else {
-        console.error("Error fetching user data:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error.message);
-    }
-  };
   const handleLogout = () => {
     localStorage.removeItem("token");
     setAuth(false);
@@ -62,18 +27,6 @@ const Dashboard = ({ setAuth }) => {
           Logout
         </button>
       </div>
-
-      {/* <div className="mt-8">
-        <h2 className="text-xl font-semibold mb-4">All Users:</h2>
-        <ul>
-          {users.map((user) => (
-            <li key={user.user_id}>
-              <p>Name: {user.user_name}</p>
-              <p>Email: {user.user_email}</p>
-            </li>
-          ))}
-        </ul>
-      </div> */}
     </div>
   );
 };

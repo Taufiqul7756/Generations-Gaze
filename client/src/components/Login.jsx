@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
