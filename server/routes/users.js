@@ -17,11 +17,10 @@ router.get("/:userId", async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await pool.query(
-      "SELECT user_name, user_email FROM users WHERE user_id = $1",
+      "SELECT  user_id,user_name, user_email, user_password FROM users WHERE user_id = $1",
       [userId]
     );
 
-    console.log("user-------", user);
     if (user.rows.length > 0) {
       res.json(user.rows[0]);
     } else {

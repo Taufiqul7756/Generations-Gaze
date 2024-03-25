@@ -6,19 +6,15 @@ const UserContext = createContext();
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  const [currentUsersToken, setCurrentUsersToken] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
-  console.log("currentUsers uuid:", currentUsersToken);
   console.log("currentUser:", currentUser);
 
   useEffect(() => {
     // Decode token to get current user info
     const token = localStorage.getItem("token");
-    // console.log("token:", token);
     if (token) {
       const decoded = jwtDecode(token);
-      setCurrentUsersToken(decoded);
       fetchUserData(decoded.user);
     }
   }, []);
