@@ -2,7 +2,8 @@ import React from "react";
 import { useUser } from "../context/UserContext";
 
 const Dashboard = ({ setAuth }) => {
-  const { currentUser, setCurrentUser } = useUser();
+  const { currentUser } = useUser();
+  // const { currentUser, setCurrentUser } = useUser();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -10,7 +11,7 @@ const Dashboard = ({ setAuth }) => {
   };
 
   return (
-    <div className="p-10 bg-[#1877F2]">
+    <div className="p-10 bg-[#38e9e9] h-screen">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold underline">Dashboard</h1>
         {currentUser && (
@@ -20,7 +21,7 @@ const Dashboard = ({ setAuth }) => {
         )}
         <button
           onClick={handleLogout}
-          className="bg-transparent hover:bg-blue-500 text-white 
+          className="bg-transparent hover:bg-blue-500 text-black 
           font-semibold hover:text-white py-2 px-4 
           border border-black hover:border-transparent rounded"
         >

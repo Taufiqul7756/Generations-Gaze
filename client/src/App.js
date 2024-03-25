@@ -16,7 +16,6 @@ import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 
 import "./App.css";
-
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
