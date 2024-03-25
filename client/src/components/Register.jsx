@@ -6,14 +6,19 @@ const Register = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
+    confirmPassword: "",
     name: "",
   });
-  const { email, password, name } = inputs;
+  const { email, password, name, confirmPassword } = inputs;
   const onChange = (e) =>
     setInputs({ ...inputs, [e.target.name]: e.target.value });
 
   const onSubmitForm = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
     try {
       const body = { name, email, password };
       const response = await fetch("http://localhost:5000/auth/register", {
@@ -82,7 +87,25 @@ const Register = ({ setAuth }) => {
               value={password}
               onChange={onChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-              placeholder="******************"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="confirmPassword"
+              className="block mb-2 text-sm font-medium"
+            >
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={onChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+              placeholder="Confirm your password"
               required
             />
           </div>
@@ -98,12 +121,12 @@ const Register = ({ setAuth }) => {
               className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
             >
               I agree with the{" "}
-              <a
+              <Link
                 href="#"
                 className="text-blue-600 hover:underline dark:text-blue-500"
               >
                 terms and conditions
-              </a>
+              </Link>
             </label>
           </div>
           <button
