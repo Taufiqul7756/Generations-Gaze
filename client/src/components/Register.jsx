@@ -39,7 +39,11 @@ const Register = ({ setAuth }) => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen bg-[#1877F2]">
+    <div className="grid justify-center items-center h-screen bg-[#1877F2]">
+      <div className=" grid justify-center items-center font-bold text-xl text-white">
+        <h1>Do you know your grad grandfather's name?</h1>
+      </div>
+
       <div className="max-w-md w-full px-6 py-12 bg-white shadow-md rounded-md">
         <h1 className="text-3xl font-bold mb-8 text-center">Register</h1>
         <form onSubmit={onSubmitForm}>
