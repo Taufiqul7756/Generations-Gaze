@@ -3,7 +3,6 @@ import { useUser } from "../context/UserContext";
 
 const Dashboard = ({ setAuth }) => {
   const { currentUser } = useUser();
-  // const { currentUser, setCurrentUser } = useUser();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -15,15 +14,16 @@ const Dashboard = ({ setAuth }) => {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold underline">Dashboard</h1>
         {currentUser && (
-          <div className="mt-4 border ">
+          <div className="mt-4 border">
             <p>Logged in as: {currentUser.user_name}</p>
           </div>
         )}
+
         <button
           onClick={handleLogout}
           className="bg-transparent hover:bg-blue-500 text-black 
-          font-semibold hover:text-white py-2 px-4 
-          border border-black hover:border-transparent rounded"
+            font-semibold hover:text-white py-2 px-4 
+            border border-black hover:border-transparent rounded"
         >
           Logout
         </button>
@@ -31,5 +31,4 @@ const Dashboard = ({ setAuth }) => {
     </div>
   );
 };
-
 export default Dashboard;
